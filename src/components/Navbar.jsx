@@ -43,7 +43,7 @@ export default function Navbar() {
           ⚖️
         </div>
         <div>
-          <div style={{ color: "white", fontWeight: 700, fontSize: 14, letterSpacing: 0.3 }}>BANKUM</div>
+          <div style={{ color: "white", fontWeight: 700, fontSize: 14, letterSpacing: 0.3 }}>SIPP TUN</div>
           <div style={{ color: "#93c5fd", fontSize: 10, fontWeight: 500, letterSpacing: 1 }}>KALIMANTAN TIMUR</div>
         </div>
       </Link>

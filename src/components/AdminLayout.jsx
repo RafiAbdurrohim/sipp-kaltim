@@ -30,7 +30,7 @@ export default function AdminLayout({ children }) {
               borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18,
             }}>⚖️</div>
             <div>
-              <div style={{ color: 'white', fontWeight: 700, fontSize: 13 }}>SIPP TUN</div>
+              <div style={{ color: 'white', fontWeight: 700, fontSize: 13 }}>BANKUM</div>
               <div style={{ color: '#60a5fa', fontSize: 10, letterSpacing: 1 }}>ADMIN PANEL</div>
             </div>
           </div>
