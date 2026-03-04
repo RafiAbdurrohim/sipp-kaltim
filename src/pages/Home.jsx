@@ -115,11 +115,11 @@ export default function Home() {
 
       <Navbar />
 
-      {/* HERO */}
+      {/* HERO SECTION */}
       <div
         style={{
           background: "linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #2563eb 100%)",
-          padding: "60px 32px 0",
+          padding: "60px 0 0", // Padding horizontal 32px dihapus di sini agar wave bisa full width
           position: "relative",
           overflow: "hidden",
           marginLeft: "calc(-50vw + 50%)",
@@ -127,164 +127,174 @@ export default function Home() {
           width: "100vw",
         }}
       >
+        {/* Decorative blobs */}
         <div style={{ position: "absolute", top: -100, right: -100, width: 400, height: 400, borderRadius: "50%", background: "rgba(96,165,250,0.06)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", top: 100, right: 200, width: 200, height: 200, borderRadius: "50%", background: "rgba(167,139,250,0.05)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: 80, left: -60, width: 280, height: 280, borderRadius: "50%", background: "rgba(96,165,250,0.04)", pointerEvents: "none" }} />
 
-        {/* ANNOUNCEMENT BAR */}
-        <div className={`fade-up ${heroVisible ? "visible" : ""}`} style={{ maxWidth: 860, margin: "0 auto 20px", display: "flex", justifyContent: "center" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
-              background: "rgba(96,165,250,0.12)",
-              border: "1px solid rgba(96,165,250,0.25)",
-              borderRadius: 30,
-              padding: "7px 18px",
-            }}
-          >
-            <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#34d399", display: "inline-block", boxShadow: "0 0 8px #34d399", animation: "pulse-ring 1.5s infinite" }} />
-            <span style={{ color: "#93c5fd", fontSize: 12, fontWeight: 600, letterSpacing: 0.5 }}>Data diperbarui secara real-time · {new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}</span>
-          </div>
-        </div>
-
-        {/* TITLE */}
-        <div style={{ maxWidth: 860, margin: "0 auto", textAlign: "center", position: "relative" }}>
-          <div
-            className={`fade-up d1 ${heroVisible ? "visible" : ""}`}
-            style={{
-              display: "inline-block",
-              background: "rgba(96,165,250,0.15)",
-              border: "1px solid rgba(96,165,250,0.3)",
-              borderRadius: 20,
-              padding: "5px 16px",
-              color: "#93c5fd",
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: 2,
-              marginBottom: 20,
-              textTransform: "uppercase",
-            }}
-          >
-            Pemerintah Provinsi Kalimantan Timur
-          </div>
-
-          <h1 className={`fade-up d2 hero-title ${heroVisible ? "visible" : ""}`} style={{ color: "white", fontSize: 42, fontWeight: 800, lineHeight: 1.2, marginBottom: 16, letterSpacing: -0.5 }}>
-            Sistem Informasi Penelusuran
-            <br />
-            <span style={{ background: "linear-gradient(90deg, #60a5fa, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Perkara Tata Usaha Negara</span>
-          </h1>
-
-          <p className={`fade-up d3 hero-subtitle ${heroVisible ? "visible" : ""}`} style={{ color: "#94a3b8", fontSize: 15, lineHeight: 1.7, maxWidth: 540, margin: "0 auto 32px" }}>
-            Akses informasi perkara TUN secara transparan dan real-time. Pantau status perkara dari tahap pemeriksaan hingga putusan berkekuatan hukum tetap.
-          </p>
-
-          {/* SEARCH BAR */}
-          <div
-            className={`fade-up d3 hero-search ${heroVisible ? "visible" : ""}`}
-            style={{
-              display: "flex",
-              maxWidth: 600,
-              margin: "0 auto 48px",
-              background: "rgba(255,255,255,0.07)",
-              borderRadius: 14,
-              padding: 6,
-              border: "1px solid rgba(255,255,255,0.12)",
-              backdropFilter: "blur(12px)",
-            }}
-          >
-            <input
-              className="search-input"
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setPage(1);
-              }}
-              placeholder="Cari nomor perkara..."
-              style={{ flex: 1, background: "transparent", border: "none", color: "white", padding: "10px 16px", fontSize: 14 }}
-            />
-            <button
-              style={{
-                background: "linear-gradient(135deg, #3b82f6, #6366f1)",
-                border: "none",
-                color: "white",
-                padding: "10px 24px",
-                borderRadius: 10,
-                fontSize: 13,
-                fontWeight: 600,
-                cursor: "pointer",
-              }}
-            >
-              🔍 Cari
-            </button>
-          </div>
-        </div>
-
-        {/* STAT CARDS */}
-        <div className={`fade-up d4 stat-grid ${heroVisible ? "visible" : ""}`} style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, maxWidth: 900, margin: "0 auto 48px" }}>
-          {stats.map((s, i) => (
+        {/* --- PEMBUNGKUS KONTEN DENGAN PADDING --- */}
+        <div style={{ padding: "0 24px", position: "relative", zIndex: 1 }}>
+          {/* ANNOUNCEMENT BAR */}
+          <div className={`fade-up ${heroVisible ? "visible" : ""}`} style={{ maxWidth: 860, margin: "0 auto 20px", display: "flex", justifyContent: "center" }}>
             <div
-              key={i}
-              className="stat-card"
               style={{
-                background: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                borderRadius: 14,
-                padding: "20px 18px",
-                backdropFilter: "blur(12px)",
-                transition: "transform 0.25s",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                background: "rgba(96,165,250,0.12)",
+                border: "1px solid rgba(96,165,250,0.25)",
+                borderRadius: 30,
+                padding: "7px 18px",
               }}
             >
-              <div style={{ fontSize: 26, marginBottom: 8 }}>{s.icon}</div>
-              <div style={{ color: "white", fontSize: 30, fontWeight: 800, letterSpacing: -1 }}>
-                <AnimatedNumber target={s.value} />
-              </div>
-              <div style={{ color: "#93c5fd", fontSize: 12, fontWeight: 600, marginTop: 2 }}>{s.label}</div>
-              <div style={{ color: "#94a3b8", fontSize: 11, marginTop: 4 }}>{s.sub}</div>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#34d399", display: "inline-block", boxShadow: "0 0 8px #34d399", animation: "pulse-ring 1.5s infinite" }} />
+              <span style={{ color: "#93c5fd", fontSize: 12, fontWeight: 600, letterSpacing: 0.5 }}>Data diperbarui secara real-time · {new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}</span>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* INFO STRIP */}
-        <div
-          className={`fade-up d5 info-grid ${heroVisible ? "visible" : ""}`}
-          style={{
-            maxWidth: 900,
-            margin: "0 auto 0",
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 12,
-            paddingBottom: 0,
-          }}
-        >
-          {[
-            { icon: "🏛️", title: "Pengadilan TUN", desc: "Kalimantan Timur & Utara" },
-            { icon: "📅", title: "Jadwal Sidang", desc: "Senin–Jumat" },
-            { icon: "📞", title: "Layanan Informasi", desc: "Hubungi kantor kami" },
-          ].map((item, i) => (
+          {/* TITLE */}
+          <div style={{ maxWidth: 860, margin: "0 auto", textAlign: "center", position: "relative" }}>
             <div
-              key={i}
-              className="info-card"
+              className={`fade-up d1 ${heroVisible ? "visible" : ""}`}
+              style={{
+                display: "inline-block",
+                background: "rgba(96,165,250,0.15)",
+                border: "1px solid rgba(96,165,250,0.3)",
+                borderRadius: 20,
+                padding: "5px 16px",
+                color: "#93c5fd",
+                fontSize: 11,
+                fontWeight: 600,
+                letterSpacing: 2,
+                marginBottom: 20,
+                textTransform: "uppercase",
+              }}
+            >
+              Pemerintah Provinsi Kalimantan Timur
+            </div>
+
+            <h1 className={`fade-up d2 hero-title ${heroVisible ? "visible" : ""}`} style={{ color: "white", fontSize: 42, fontWeight: 800, lineHeight: 1.2, marginBottom: 16, letterSpacing: -0.5 }}>
+              Sistem Informasi Penelusuran
+              <br />
+              <span style={{ background: "linear-gradient(90deg, #60a5fa, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Perkara Tata Usaha Negara</span>
+            </h1>
+
+            <p className={`fade-up d3 hero-subtitle ${heroVisible ? "visible" : ""}`} style={{ color: "#94a3b8", fontSize: 15, lineHeight: 1.7, maxWidth: 540, margin: "0 auto 32px" }}>
+              Akses informasi perkara TUN secara transparan dan real-time. Pantau status perkara dari tahap pemeriksaan hingga putusan berkekuatan hukum tetap.
+            </p>
+
+            {/* SEARCH BAR */}
+            <div
+              className={`fade-up d3 hero-search ${heroVisible ? "visible" : ""}`}
               style={{
                 display: "flex",
-                alignItems: "center",
-                gap: 12,
-                background: "rgba(255,255,255,0.05)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: 12,
-                padding: "14px 18px",
+                maxWidth: 600,
+                margin: "0 auto 48px",
+                background: "rgba(255,255,255,0.07)",
+                borderRadius: 14,
+                padding: 6,
+                border: "1px solid rgba(255,255,255,0.12)",
+                backdropFilter: "blur(12px)",
               }}
             >
-              <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
-              <div>
-                <div style={{ color: "white", fontSize: 13, fontWeight: 600 }}>{item.title}</div>
-                <div style={{ color: "#94a3b8", fontSize: 11, marginTop: 2 }}>{item.desc}</div>
-              </div>
+              <input
+                className="search-input"
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setPage(1);
+                }}
+                placeholder="Cari nomor perkara, penggugat, atau tergugat..."
+                style={{ flex: 1, background: "transparent", border: "none", color: "white", padding: "10px 16px", fontSize: 14 }}
+              />
+              <button
+                style={{
+                  background: "linear-gradient(135deg, #3b82f6, #6366f1)",
+                  border: "none",
+                  color: "white",
+                  padding: "10px 24px",
+                  borderRadius: 10,
+                  fontSize: 13,
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  boxShadow: "0 4px 12px rgba(59,130,246,0.4)",
+                }}
+              >
+                🔍 Cari
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
 
+          {/* STAT CARDS */}
+          <div className={`fade-up d4 stat-grid ${heroVisible ? "visible" : ""}`} style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, maxWidth: 900, margin: "0 auto 48px" }}>
+            {stats.map((s, i) => (
+              <div
+                key={i}
+                className="stat-card"
+                style={{
+                  background: "rgba(255,255,255,0.07)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: 14,
+                  padding: "20px 18px",
+                  backdropFilter: "blur(12px)",
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.2)",
+                  transition: "transform 0.25s, box-shadow 0.25s",
+                }}
+              >
+                <div style={{ fontSize: 26, marginBottom: 8 }}>{s.icon}</div>
+                <div style={{ color: "white", fontSize: 30, fontWeight: 800, letterSpacing: -1 }}>
+                  <AnimatedNumber target={s.value} />
+                </div>
+                <div style={{ color: "#93c5fd", fontSize: 12, fontWeight: 600, marginTop: 2 }}>{s.label}</div>
+                <div style={{ color: "#94a3b8", fontSize: 11, marginTop: 4 }}>{s.sub}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* INFO STRIP */}
+          <div
+            className={`fade-up d5 info-grid ${heroVisible ? "visible" : ""}`}
+            style={{
+              maxWidth: 900,
+              margin: "0 auto 0",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: 12,
+              paddingBottom: 0,
+            }}
+          >
+            {[
+              { icon: "🏛️", title: "Pengadilan TUN", desc: "Kalimantan Timur & Kalimantan Utara" },
+              { icon: "📅", title: "Jadwal Sidang", desc: "Tersedia setiap hari kerja Senin–Jumat" },
+              { icon: "📞", title: "Layanan Informasi", desc: "Hubungi kantor untuk informasi lebih lanjut" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="info-card"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 12,
+                  background: "rgba(255,255,255,0.05)",
+                  border: "1px solid rgba(255,255,255,0.08)",
+                  borderRadius: 12,
+                  padding: "14px 18px",
+                  cursor: "default",
+                  transition: "background 0.2s",
+                }}
+              >
+                <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
+                <div>
+                  <div style={{ color: "white", fontSize: 13, fontWeight: 600 }}>{item.title}</div>
+                  <div style={{ color: "#94a3b8", fontSize: 11, marginTop: 2 }}>{item.desc}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* --- AKHIR PEMBUNGKUS KONTEN --- */}
+
+        {/* WAVE - Sekarang beneran Full Width melampaui konten */}
         <div style={{ marginTop: 40, lineHeight: 0, overflow: "hidden" }}>
           <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: "block", width: "100%", height: 80 }}>
             <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f0f4ff" />
