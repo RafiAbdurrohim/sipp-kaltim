@@ -98,6 +98,19 @@ export default function Home() {
         .filter-btn:hover { opacity: 0.85; }
         .search-input:focus { outline: none; }
         .info-card:hover { background: rgba(255,255,255,0.12) !important; }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) { 
+          .hero-title { font-size: 28px !important; } 
+          .hero-subtitle { font-size: 13px !important; } 
+          .stat-grid { grid-template-columns: repeat(2,1fr) !important; } 
+          .info-grid { grid-template-columns: 1fr !important; } 
+          .table-section { padding: 20px 12px !important; } 
+          .filter-wrap { gap: 6px !important; } 
+          .footer-grid { grid-template-columns: 1fr !important; gap: 24px !important; } 
+          .nav-menu { display: none !important; } 
+          .hero-search { margin: 0 16px 32px !important; }
+        }
       `}</style>
 
       <Navbar />
@@ -114,7 +127,6 @@ export default function Home() {
           width: "100vw",
         }}
       >
-        {/* Decorative blobs */}
         <div style={{ position: "absolute", top: -100, right: -100, width: 400, height: 400, borderRadius: "50%", background: "rgba(96,165,250,0.06)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", top: 100, right: 200, width: 200, height: 200, borderRadius: "50%", background: "rgba(167,139,250,0.05)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: 80, left: -60, width: 280, height: 280, borderRadius: "50%", background: "rgba(96,165,250,0.04)", pointerEvents: "none" }} />
@@ -158,19 +170,19 @@ export default function Home() {
             Pemerintah Provinsi Kalimantan Timur
           </div>
 
-          <h1 className={`fade-up d2 ${heroVisible ? "visible" : ""}`} style={{ color: "white", fontSize: 42, fontWeight: 800, lineHeight: 1.2, marginBottom: 16, letterSpacing: -0.5 }}>
+          <h1 className={`fade-up d2 hero-title ${heroVisible ? "visible" : ""}`} style={{ color: "white", fontSize: 42, fontWeight: 800, lineHeight: 1.2, marginBottom: 16, letterSpacing: -0.5 }}>
             Sistem Informasi Penelusuran
             <br />
             <span style={{ background: "linear-gradient(90deg, #60a5fa, #a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Perkara Tata Usaha Negara</span>
           </h1>
 
-          <p className={`fade-up d3 ${heroVisible ? "visible" : ""}`} style={{ color: "#94a3b8", fontSize: 15, lineHeight: 1.7, maxWidth: 540, margin: "0 auto 32px" }}>
+          <p className={`fade-up d3 hero-subtitle ${heroVisible ? "visible" : ""}`} style={{ color: "#94a3b8", fontSize: 15, lineHeight: 1.7, maxWidth: 540, margin: "0 auto 32px" }}>
             Akses informasi perkara TUN secara transparan dan real-time. Pantau status perkara dari tahap pemeriksaan hingga putusan berkekuatan hukum tetap.
           </p>
 
           {/* SEARCH BAR */}
           <div
-            className={`fade-up d3 ${heroVisible ? "visible" : ""}`}
+            className={`fade-up d3 hero-search ${heroVisible ? "visible" : ""}`}
             style={{
               display: "flex",
               maxWidth: 600,
@@ -189,7 +201,7 @@ export default function Home() {
                 setSearch(e.target.value);
                 setPage(1);
               }}
-              placeholder="Cari nomor perkara, penggugat, atau tergugat..."
+              placeholder="Cari nomor perkara..."
               style={{ flex: 1, background: "transparent", border: "none", color: "white", padding: "10px 16px", fontSize: 14 }}
             />
             <button
@@ -202,7 +214,6 @@ export default function Home() {
                 fontSize: 13,
                 fontWeight: 600,
                 cursor: "pointer",
-                boxShadow: "0 4px 12px rgba(59,130,246,0.4)",
               }}
             >
               🔍 Cari
@@ -211,7 +222,7 @@ export default function Home() {
         </div>
 
         {/* STAT CARDS */}
-        <div className={`fade-up d4 ${heroVisible ? "visible" : ""}`} style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, maxWidth: 900, margin: "0 auto 48px" }}>
+        <div className={`fade-up d4 stat-grid ${heroVisible ? "visible" : ""}`} style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, maxWidth: 900, margin: "0 auto 48px" }}>
           {stats.map((s, i) => (
             <div
               key={i}
@@ -222,8 +233,7 @@ export default function Home() {
                 borderRadius: 14,
                 padding: "20px 18px",
                 backdropFilter: "blur(12px)",
-                boxShadow: "0 4px 24px rgba(0,0,0,0.2)",
-                transition: "transform 0.25s, box-shadow 0.25s",
+                transition: "transform 0.25s",
               }}
             >
               <div style={{ fontSize: 26, marginBottom: 8 }}>{s.icon}</div>
@@ -238,7 +248,7 @@ export default function Home() {
 
         {/* INFO STRIP */}
         <div
-          className={`fade-up d5 ${heroVisible ? "visible" : ""}`}
+          className={`fade-up d5 info-grid ${heroVisible ? "visible" : ""}`}
           style={{
             maxWidth: 900,
             margin: "0 auto 0",
@@ -249,9 +259,9 @@ export default function Home() {
           }}
         >
           {[
-            { icon: "🏛️", title: "Pengadilan TUN", desc: "Kalimantan Timur & Kalimantan Utara" },
-            { icon: "📅", title: "Jadwal Sidang", desc: "Tersedia setiap hari kerja Senin–Jumat" },
-            { icon: "📞", title: "Layanan Informasi", desc: "Hubungi kantor untuk informasi lebih lanjut" },
+            { icon: "🏛️", title: "Pengadilan TUN", desc: "Kalimantan Timur & Utara" },
+            { icon: "📅", title: "Jadwal Sidang", desc: "Senin–Jumat" },
+            { icon: "📞", title: "Layanan Informasi", desc: "Hubungi kantor kami" },
           ].map((item, i) => (
             <div
               key={i}
@@ -264,8 +274,6 @@ export default function Home() {
                 border: "1px solid rgba(255,255,255,0.08)",
                 borderRadius: 12,
                 padding: "14px 18px",
-                cursor: "default",
-                transition: "background 0.2s",
               }}
             >
               <span style={{ fontSize: 24, flexShrink: 0 }}>{item.icon}</span>
@@ -277,8 +285,6 @@ export default function Home() {
           ))}
         </div>
 
-        {/* WAVE */}
-        {/* WAVE */}
         <div style={{ marginTop: 40, lineHeight: 0, overflow: "hidden" }}>
           <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: "block", width: "100%", height: 80 }}>
             <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#f0f4ff" />
@@ -287,15 +293,13 @@ export default function Home() {
       </div>
 
       {/* TABLE SECTION */}
-      <div id="perkara" style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 24px" }}>
+      <div id="perkara" className="table-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "32px 24px" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20, flexWrap: "wrap", gap: 12 }}>
           <div>
             <h2 style={{ fontSize: 22, fontWeight: 800, color: "#0f172a", letterSpacing: -0.3 }}>Data Penanganan Perkara TUN</h2>
-            <p style={{ color: "#64748b", fontSize: 13, marginTop: 3 }}>
-              Pembaruan: {new Date().toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" })} · {filtered.length} perkara
-            </p>
+            <p style={{ color: "#64748b", fontSize: 13, marginTop: 3 }}>{filtered.length} perkara ditemukan</p>
           </div>
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          <div className="filter-wrap" style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             {["Semua", "Pemeriksaan", "Banding", "Kasasi", "Inkracht"].map((s) => (
               <button
                 key={s}
@@ -310,12 +314,9 @@ export default function Home() {
                   border: "1.5px solid",
                   fontSize: 12,
                   fontWeight: 600,
-                  cursor: "pointer",
-                  transition: "all 0.2s",
                   borderColor: filterStatus === s ? "#3b82f6" : "#e2e8f0",
                   background: filterStatus === s ? "#3b82f6" : "white",
                   color: filterStatus === s ? "white" : "#64748b",
-                  boxShadow: filterStatus === s ? "0 4px 12px rgba(59,130,246,0.25)" : "none",
                 }}
               >
                 {s}
@@ -329,8 +330,8 @@ export default function Home() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
               <thead>
                 <tr style={{ background: "linear-gradient(135deg, #1e3a8a, #1d4ed8)" }}>
-                  {["No", "No. Perkara", "Penggugat", "Tergugat", "Obyek Sengketa", "Thn. Persiapan", "Tk. Pertama", "Banding", "Kasasi", "PK", "Status"].map((h) => (
-                    <th key={h} style={{ padding: "14px 12px", color: "white", fontWeight: 700, fontSize: 11, textAlign: "left", letterSpacing: 0.4, textTransform: "uppercase", whiteSpace: "nowrap" }}>
+                  {["No", "No. Perkara", "Penggugat", "Tergugat", "Obyek Sengketa", "Persiapan", "Tk. I", "Banding", "Kasasi", "PK", "Status"].map((h) => (
+                    <th key={h} style={{ padding: "14px 12px", color: "white", fontWeight: 700, fontSize: 11, textAlign: "left", textTransform: "uppercase", whiteSpace: "nowrap" }}>
                       {h}
                     </th>
                   ))}
@@ -340,34 +341,28 @@ export default function Home() {
                 {loading ? (
                   <tr>
                     <td colSpan={11} style={{ padding: "56px", textAlign: "center", color: "#94a3b8" }}>
-                      <div style={{ fontSize: 32, marginBottom: 8 }}>⏳</div>Memuat data...
-                    </td>
-                  </tr>
-                ) : paginated.length === 0 ? (
-                  <tr>
-                    <td colSpan={11} style={{ padding: "56px", textAlign: "center", color: "#94a3b8" }}>
-                      <div style={{ fontSize: 36, marginBottom: 8 }}>🔍</div>Tidak ada data perkara yang sesuai
+                      Memuat data...
                     </td>
                   </tr>
                 ) : (
                   paginated.map((p, i) => (
-                    <tr key={p.id} className="row-hover" style={{ background: i % 2 === 0 ? "white" : "#f8faff", borderBottom: "1px solid #f0f4ff", transition: "background 0.15s" }}>
-                      <td style={{ padding: "13px 12px", color: "#94a3b8", fontWeight: 600 }}>{(page - 1) * perPage + i + 1}</td>
-                      <td style={{ padding: "13px 12px", color: "#1d4ed8", fontWeight: 700, whiteSpace: "nowrap", fontSize: 12 }}>{p.no_perkara}</td>
-                      <td style={{ padding: "13px 12px", color: "#1e293b", fontWeight: 500 }}>{p.penggugat}</td>
-                      <td style={{ padding: "13px 12px", color: "#1e293b", fontWeight: 500 }}>{p.tergugat}</td>
-                      <td style={{ padding: "13px 12px", color: "#475569", maxWidth: 180, lineHeight: 1.5 }}>{p.obyek_sengketa}</td>
-                      <td style={{ padding: "13px 12px", textAlign: "center" }}>{putusanBadge(p.tahap_persiapan)}</td>
-                      <td style={{ padding: "13px 12px", textAlign: "center" }}>{putusanBadge(p.putusan_pertama)}</td>
-                      <td style={{ padding: "13px 12px", textAlign: "center" }}>{putusanBadge(p.putusan_banding)}</td>
-                      <td style={{ padding: "13px 12px", textAlign: "center" }}>{putusanBadge(p.putusan_kasasi)}</td>
-                      <td style={{ padding: "13px 12px", textAlign: "center" }}>{putusanBadge(p.putusan_pk)}</td>
+                    <tr key={p.id} className="row-hover" style={{ background: i % 2 === 0 ? "white" : "#f8faff", borderBottom: "1px solid #f0f4ff" }}>
+                      <td style={{ padding: "13px 12px", color: "#94a3b8" }}>{(page - 1) * perPage + i + 1}</td>
+                      <td style={{ padding: "13px 12px", color: "#1d4ed8", fontWeight: 700 }}>{p.no_perkara}</td>
+                      <td style={{ padding: "13px 12px" }}>{p.penggugat}</td>
+                      <td style={{ padding: "13px 12px" }}>{p.tergugat}</td>
+                      <td style={{ padding: "13px 12px", maxWidth: 180 }}>{p.obyek_sengketa}</td>
+                      <td style={{ padding: "13px 12px" }}>{putusanBadge(p.tahap_persiapan)}</td>
+                      <td style={{ padding: "13px 12px" }}>{putusanBadge(p.putusan_pertama)}</td>
+                      <td style={{ padding: "13px 12px" }}>{putusanBadge(p.putusan_banding)}</td>
+                      <td style={{ padding: "13px 12px" }}>{putusanBadge(p.putusan_kasasi)}</td>
+                      <td style={{ padding: "13px 12px" }}>{putusanBadge(p.putusan_pk)}</td>
                       <td style={{ padding: "13px 12px" }}>
                         {statusConfig[p.status] && (
                           <span
                             style={{ display: "inline-flex", alignItems: "center", gap: 5, padding: "4px 10px", borderRadius: 20, fontSize: 11, fontWeight: 600, background: statusConfig[p.status].bg, color: statusConfig[p.status].text }}
                           >
-                            <span style={{ width: 6, height: 6, borderRadius: "50%", background: statusConfig[p.status].dot, display: "inline-block" }} />
+                            <span style={{ width: 6, height: 6, borderRadius: "50%", background: statusConfig[p.status].dot }} />
                             {p.status}
                           </span>
                         )}
@@ -378,107 +373,34 @@ export default function Home() {
               </tbody>
             </table>
           </div>
-
-          <div style={{ padding: "14px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #f0f4ff", background: "#fafbff" }}>
-            <span style={{ color: "#94a3b8", fontSize: 12 }}>
-              Halaman {page} dari {totalPages || 1} · {filtered.length} perkara
-            </span>
-            <div style={{ display: "flex", gap: 6 }}>
-              <button
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
-                disabled={page === 1}
-                style={{ padding: "6px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", background: "white", color: page === 1 ? "#cbd5e1" : "#1d4ed8", fontWeight: 600, fontSize: 12, cursor: page === 1 ? "default" : "pointer" }}
-              >
-                ← Prev
-              </button>
-              {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => i + 1).map((n) => (
-                <button
-                  key={n}
-                  onClick={() => setPage(n)}
-                  style={{
-                    width: 34,
-                    height: 34,
-                    borderRadius: 8,
-                    border: "1.5px solid",
-                    borderColor: page === n ? "#3b82f6" : "#e2e8f0",
-                    background: page === n ? "#3b82f6" : "white",
-                    color: page === n ? "white" : "#64748b",
-                    fontWeight: 700,
-                    fontSize: 13,
-                    cursor: "pointer",
-                    boxShadow: page === n ? "0 4px 12px rgba(59,130,246,0.3)" : "none",
-                  }}
-                >
-                  {n}
-                </button>
-              ))}
-              <button
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-                disabled={page === totalPages || totalPages === 0}
-                style={{
-                  padding: "6px 14px",
-                  borderRadius: 8,
-                  border: "1.5px solid #e2e8f0",
-                  background: "white",
-                  color: page === totalPages || totalPages === 0 ? "#cbd5e1" : "#1d4ed8",
-                  fontWeight: 600,
-                  fontSize: 12,
-                  cursor: page === totalPages || totalPages === 0 ? "default" : "pointer",
-                }}
-              >
-                Next →
-              </button>
-            </div>
-          </div>
         </div>
       </div>
 
       {/* FOOTER */}
       <footer style={{ background: "linear-gradient(135deg, #0f172a, #1e3a8a)", padding: "48px 32px 28px", marginTop: 24 }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          {/* Top */}
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 40, marginBottom: 40, paddingBottom: 32, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-            {/* Brand */}
+          <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 40, marginBottom: 40, paddingBottom: 32, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-                <div style={{ width: 36, height: 36, background: "linear-gradient(135deg, #60a5fa, #a78bfa)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>⚖️</div>
-                <div>
-                  <div style={{ color: "white", fontWeight: 700, fontSize: 14 }}>SIPP TUN</div>
-                  <div style={{ color: "#60a5fa", fontSize: 10, letterSpacing: 1 }}>KALIMANTAN TIMUR</div>
-                </div>
+                <div style={{ width: 36, height: 36, background: "linear-gradient(135deg, #60a5fa, #a78bfa)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>⚖️</div>
+                <div style={{ color: "white", fontWeight: 700 }}>SIPP TUN Kaltim</div>
               </div>
-              <p style={{ color: "#64748b", fontSize: 13, lineHeight: 1.7, maxWidth: 280 }}>Sistem Informasi Penelusuran Perkara Tata Usaha Negara Provinsi Kalimantan Timur. Transparansi data untuk keadilan yang lebih baik.</p>
+              <p style={{ color: "#64748b", fontSize: 13, lineHeight: 1.7 }}>Sistem Informasi Penelusuran Perkara Tata Usaha Negara Provinsi Kalimantan Timur.</p>
             </div>
-            {/* Links */}
             <div>
               <div style={{ color: "white", fontWeight: 700, fontSize: 13, marginBottom: 14 }}>Navigasi</div>
-              {["Beranda", "Data Perkara", "Jadwal Sidang", "Statistik"].map((item) => (
-                <div key={item} style={{ color: "#64748b", fontSize: 13, marginBottom: 8, cursor: "pointer" }} onMouseEnter={(e) => (e.target.style.color = "#93c5fd")} onMouseLeave={(e) => (e.target.style.color = "#64748b")}>
+              {["Beranda", "Data Perkara", "Statistik"].map((item) => (
+                <div key={item} style={{ color: "#64748b", fontSize: 13, marginBottom: 8 }}>
                   {item}
                 </div>
               ))}
             </div>
-            {/* Info */}
             <div>
               <div style={{ color: "white", fontWeight: 700, fontSize: 13, marginBottom: 14 }}>Informasi</div>
-              {[
-                { icon: "🏛️", text: "PTUN Samarinda" },
-                { icon: "📅", text: "Senin – Jumat" },
-                { icon: "🕐", text: "08.00 – 16.00 WITA" },
-                { icon: "📍", text: "Kalimantan Timur" },
-              ].map((item, i) => (
-                <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, color: "#64748b", fontSize: 13, marginBottom: 8 }}>
-                  <span>{item.icon}</span>
-                  <span>{item.text}</span>
-                </div>
-              ))}
+              <div style={{ color: "#64748b", fontSize: 13 }}>📍 Kalimantan Timur</div>
             </div>
           </div>
-          {/* Bottom */}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 8 }}>
-            <div style={{ color: "#64748b", fontSize: 12 }}>© 2025 Pemerintah Provinsi Kalimantan Timur · Hak Cipta Dilindungi</div>
-            <div style={{ color: "#64748b", fontSize: 12 }}>Dikembangkan untuk transparansi peradilan TUN 🔵</div>
-          </div>
+          <div style={{ textAlign: "center", color: "#64748b", fontSize: 12 }}>© 2026 Pemerintah Provinsi Kalimantan Timur</div>
         </div>
       </footer>
     </div>
