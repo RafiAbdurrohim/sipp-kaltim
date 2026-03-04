@@ -111,6 +111,22 @@ export default function Home() {
           .nav-menu { display: none !important; } 
           .hero-search { margin: 0 16px 32px !important; }
         }
+          .footer-link {
+        color: #94a3b8;
+        text-decoration: none;
+        font-size: 13px;
+        transition: all 0.3s ease;
+        display: block;
+        margin-bottom: 10px;
+      }
+      .footer-link:hover {
+        color: #60a5fa;
+        transform: translateX(5px);
+      }
+      .footer-social:hover {
+        transform: translateY(-3px);
+        background: rgba(255, 255, 255, 0.15) !important;
+      }
       `}</style>
 
       <Navbar />
@@ -387,30 +403,117 @@ export default function Home() {
       </div>
 
       {/* FOOTER */}
-      <footer style={{ background: "linear-gradient(135deg, #0f172a, #1e3a8a)", padding: "48px 32px 28px", marginTop: 24 }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto" }}>
-          <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 40, marginBottom: 40, paddingBottom: 32, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-            <div>
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-                <div style={{ width: 36, height: 36, background: "linear-gradient(135deg, #60a5fa, #a78bfa)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>⚖️</div>
-                <div style={{ color: "white", fontWeight: 700 }}>SIPP TUN Kaltim</div>
-              </div>
-              <p style={{ color: "#64748b", fontSize: 13, lineHeight: 1.7 }}>Sistem Informasi Penelusuran Perkara Tata Usaha Negara Provinsi Kalimantan Timur.</p>
-            </div>
-            <div>
-              <div style={{ color: "white", fontWeight: 700, fontSize: 13, marginBottom: 14 }}>Navigasi</div>
-              {["Beranda", "Data Perkara", "Statistik"].map((item) => (
-                <div key={item} style={{ color: "#64748b", fontSize: 13, marginBottom: 8 }}>
-                  {item}
+      <footer
+        style={{
+          background: "linear-gradient(to bottom, #0f172a, #020617)",
+          padding: "80px 24px 30px",
+          marginTop: "50px",
+          borderTop: "1px solid rgba(255,255,255,0.05)",
+        }}
+      >
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div
+            className="footer-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: "40px",
+              marginBottom: "60px",
+            }}
+          >
+            {/* Brand Section */}
+            <div style={{ maxWidth: 320 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 20 }}>
+                <div
+                  style={{
+                    width: 42,
+                    height: 42,
+                    background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+                    borderRadius: 12,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: 22,
+                    boxShadow: "0 8px 16px rgba(59,130,246,0.2)",
+                  }}
+                >
+                  ⚖️
                 </div>
+                <div>
+                  <div style={{ color: "white", fontWeight: 800, fontSize: 16, letterSpacing: "0.5px" }}>SIPP TUN</div>
+                  <div style={{ color: "#60a5fa", fontSize: 11, fontWeight: 600, letterSpacing: "1px" }}>KALTIM & KALTARA</div>
+                </div>
+              </div>
+              <p style={{ color: "#64748b", fontSize: 14, lineHeight: 1.6, marginBottom: 24 }}>Mewujudkan transparansi peradilan tata usaha negara yang akuntabel dan mudah diakses oleh seluruh lapisan masyarakat di Kalimantan.</p>
+              <div style={{ display: "flex", gap: 12 }}>
+                {["🌐", "📧", "📍"].map((icon, i) => (
+                  <div
+                    key={i}
+                    className="footer-social"
+                    style={{
+                      width: 36,
+                      height: 36,
+                      borderRadius: "50%",
+                      background: "rgba(255,255,255,0.05)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                      transition: "0.3s",
+                    }}
+                  >
+                    {icon}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Navigation */}
+            <div>
+              <h4 style={{ color: "white", fontSize: 15, fontWeight: 700, marginBottom: 25, textTransform: "uppercase", letterSpacing: "1px" }}>Navigasi Cepat</h4>
+              {["Beranda Utama", "Penelusuran Perkara", "Jadwal Sidang", "Statistik Perkara", "Prosedur Gugatan"].map((item) => (
+                <a key={item} href="#" className="footer-link">
+                  / {item}
+                </a>
               ))}
             </div>
+
+            {/* Office Info */}
             <div>
-              <div style={{ color: "white", fontWeight: 700, fontSize: 13, marginBottom: 14 }}>Informasi</div>
-              <div style={{ color: "#64748b", fontSize: 13 }}>📍 Kalimantan Timur</div>
+              <h4 style={{ color: "white", fontSize: 15, fontWeight: 700, marginBottom: 25, textTransform: "uppercase", letterSpacing: "1px" }}>Kantor Pusat</h4>
+              <div style={{ display: "flex", gap: 15, marginBottom: 20 }}>
+                <span style={{ fontSize: 18 }}>🏢</span>
+                <p style={{ color: "#64748b", fontSize: 13, lineHeight: 1.5 }}>
+                  <strong style={{ color: "#94a3b8" }}>PTUN Samarinda</strong>
+                  <br />
+                  Jl. Bung Tomo No.1, Sungai Keledang, Kec. Samarinda Seberang, Kota Samarinda, Kalimantan Timur 75131
+                </p>
+              </div>
+              <div style={{ display: "flex", gap: 15 }}>
+                <span style={{ fontSize: 18 }}>📞</span>
+                <p style={{ color: "#64748b", fontSize: 13 }}>Layanan Informasi: (0541) 123456</p>
+              </div>
             </div>
           </div>
-          <div style={{ textAlign: "center", color: "#64748b", fontSize: 12 }}>© 2026 Pemerintah Provinsi Kalimantan Timur</div>
+
+          {/* Bottom Bar */}
+          <div
+            style={{
+              paddingTop: 30,
+              borderTop: "1px solid rgba(255,255,255,0.05)",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              gap: 15,
+            }}
+          >
+            <p style={{ color: "#475569", fontSize: 12 }}>© 2026 Pemerintah Provinsi Kalimantan Timur. Hak Cipta Dilindungi.</p>
+            <div style={{ display: "flex", gap: 20 }}>
+              <span style={{ color: "#475569", fontSize: 12, cursor: "pointer" }}>Privacy Policy</span>
+              <span style={{ color: "#475569", fontSize: 12, cursor: "pointer" }}>Terms of Service</span>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
