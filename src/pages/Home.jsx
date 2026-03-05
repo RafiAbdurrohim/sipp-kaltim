@@ -44,6 +44,7 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [filterStatus, setFilterStatus] = useState("Semua");
   const [page, setPage] = useState(1);
+  const [heroVisible, setHeroVisible] = useState(false);
   const [selectedPerkara, setSelectedPerkara] = useState(null);
   const perPage = 6;
 
