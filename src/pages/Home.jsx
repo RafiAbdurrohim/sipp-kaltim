@@ -45,6 +45,7 @@ export default function Home() {
   const [filterStatus, setFilterStatus] = useState("Semua");
   const [page, setPage] = useState(1);
   const [heroVisible, setHeroVisible] = useState(false);
+  const [selectedPerkara, setSelectedPerkara] = useState(null);
   const perPage = 6;
 
   useEffect(() => {
@@ -356,7 +357,7 @@ export default function Home() {
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
               <thead>
                 <tr style={{ background: "linear-gradient(135deg, #1e3a8a, #1d4ed8)" }}>
-                  {["No", "No. Perkara", "Penggugat", "Tergugat", "Obyek Sengketa", "Persiapan", "Tk. I", "Banding", "Kasasi", "PK", "Status"].map((h) => (
+                  {["No", "No. Perkara", "Penggugat", "Tergugat", "Obyek Sengketa", "Thn. Persiapan", "Tk. Pertama", "Banding", "Kasasi", "PK", "Status", ""].map((h) => (
                     <th key={h} style={{ padding: "14px 12px", color: "white", fontWeight: 700, fontSize: 11, textAlign: "left", textTransform: "uppercase", whiteSpace: "nowrap" }}>
                       {h}
                     </th>
@@ -393,6 +394,14 @@ export default function Home() {
                           </span>
                         )}
                       </td>
+                      <td style={{ padding: "13px 12px" }}>
+                        <button
+                          onClick={() => setSelectedPerkara(p)}
+                          style={{ padding: "5px 14px", borderRadius: 6, border: "1.5px solid #3b82f6", background: "transparent", color: "#3b82f6", fontSize: 12, fontWeight: 600, cursor: "pointer" }}
+                        >
+                          Detail
+                        </button>
+                      </td>
                     </tr>
                   ))
                 )}
@@ -401,6 +410,112 @@ export default function Home() {
           </div>
         </div>
       </div>
+      {selectedPerkara && (
+        <div
+          onClick={() => setSelectedPerkara(null)}
+          style={{ position: "fixed", inset: 0, background: "rgba(15,23,42,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 300, backdropFilter: "blur(4px)", padding: 16 }}
+        >
+          <div onClick={(e) => e.stopPropagation()} style={{ background: "white", borderRadius: 20, padding: "32px", maxWidth: 680, width: "100%", maxHeight: "85vh", overflowY: "auto" }}>
+            {/* Header */}
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24 }}>
+              <div>
+                <div style={{ color: "#1d4ed8", fontWeight: 700, fontSize: 13, marginBottom: 4 }}>{selectedPerkara.no_perkara}</div>
+                <h2 style={{ fontSize: 18, fontWeight: 800, color: "#0f172a" }}>Detail Perkara</h2>
+              </div>
+              <button onClick={() => setSelectedPerkara(null)} style={{ border: "none", background: "#f1f5f9", borderRadius: 8, width: 32, height: 32, cursor: "pointer", fontSize: 16 }}>
+                ✕
+              </button>
+            </div>
+
+            {/* Info Umum */}
+            <div style={{ background: "#f8faff", borderRadius: 12, padding: "16px 20px", marginBottom: 20, border: "1px solid #e8f0fe" }}>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "#1e3a8a", marginBottom: 12, textTransform: "uppercase", letterSpacing: 0.5 }}>Identitas Perkara</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 24px" }}>
+                {[
+                  { label: "Penggugat", value: selectedPerkara.penggugat },
+                  { label: "Tergugat", value: selectedPerkara.tergugat },
+                  { label: "Tgl. Daftar", value: selectedPerkara.tgl_daftar ? new Date(selectedPerkara.tgl_daftar).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "-" },
+                  { label: "Tgl. Selesai", value: selectedPerkara.tgl_selesai ? new Date(selectedPerkara.tgl_selesai).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" }) : "-" },
+                ].map((item, i) => (
+                  <div key={i}>
+                    <div style={{ color: "#94a3b8", fontSize: 11, fontWeight: 600 }}>{item.label}</div>
+                    <div style={{ color: "#0f172a", fontSize: 13, fontWeight: 500, marginTop: 2 }}>{item.value}</div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ marginTop: 12 }}>
+                <div style={{ color: "#94a3b8", fontSize: 11, fontWeight: 600 }}>Obyek Sengketa</div>
+                <div style={{ color: "#0f172a", fontSize: 13, marginTop: 2 }}>{selectedPerkara.obyek_sengketa}</div>
+              </div>
+            </div>
+
+            {/* Tahapan */}
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#1e3a8a", marginBottom: 12, textTransform: "uppercase", letterSpacing: 0.5 }}>Riwayat Tahapan</div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {[
+                { label: "Pemeriksaan", tgl: selectedPerkara.tgl_pemeriksaan, putusan: selectedPerkara.tahap_persiapan, ket: null },
+                { label: "Putusan Tk. Pertama", tgl: null, putusan: selectedPerkara.putusan_pertama, ket: selectedPerkara.ket_pertama },
+                { label: "Putusan Banding", tgl: selectedPerkara.tgl_banding, putusan: selectedPerkara.putusan_banding, ket: selectedPerkara.ket_banding },
+                { label: "Putusan Kasasi", tgl: selectedPerkara.tgl_kasasi, putusan: selectedPerkara.putusan_kasasi, ket: selectedPerkara.ket_kasasi },
+                { label: "Putusan PK", tgl: selectedPerkara.tgl_pk, putusan: selectedPerkara.putusan_pk, ket: selectedPerkara.ket_pk },
+              ]
+                .filter((t) => t.putusan && t.putusan !== "Belum")
+                .map((t, i) => (
+                  <div key={i} style={{ background: "white", border: "1px solid #e8f0fe", borderRadius: 12, padding: "14px 18px", display: "flex", gap: 16, alignItems: "flex-start" }}>
+                    <div
+                      style={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: 10,
+                        background: "linear-gradient(135deg,#1e3a8a,#3b82f6)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: "white",
+                        fontSize: 13,
+                        fontWeight: 700,
+                        flexShrink: 0,
+                      }}
+                    >
+                      {i + 1}
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+                        <div style={{ fontWeight: 700, color: "#0f172a", fontSize: 13 }}>{t.label}</div>
+                        {t.tgl && <div style={{ color: "#94a3b8", fontSize: 11 }}>{new Date(t.tgl).toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" })}</div>}
+                      </div>
+                      <div style={{ marginBottom: t.ket ? 6 : 0 }}>{putusanBadge(t.putusan)}</div>
+                      {t.ket && <div style={{ color: "#475569", fontSize: 12, lineHeight: 1.6, marginTop: 6, background: "#f8faff", borderRadius: 8, padding: "8px 12px" }}>{t.ket}</div>}
+                    </div>
+                  </div>
+                ))}
+            </div>
+
+            {/* Status */}
+            <div style={{ marginTop: 20, padding: "14px 18px", background: "#f8faff", borderRadius: 12, border: "1px solid #e8f0fe", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <span style={{ fontWeight: 700, color: "#0f172a", fontSize: 13 }}>Status Saat Ini</span>
+              {statusConfig[selectedPerkara.status] && (
+                <span
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 5,
+                    padding: "6px 14px",
+                    borderRadius: 20,
+                    fontSize: 12,
+                    fontWeight: 600,
+                    background: statusConfig[selectedPerkara.status].bg,
+                    color: statusConfig[selectedPerkara.status].text,
+                  }}
+                >
+                  <span style={{ width: 7, height: 7, borderRadius: "50%", background: statusConfig[selectedPerkara.status].dot }} />
+                  {selectedPerkara.status}
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* FOOTER */}
       <footer

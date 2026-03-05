@@ -15,6 +15,15 @@ const initialForm = {
   pk: "Belum",
   status: "Pemeriksaan",
   tglDaftar: "",
+  tglPemeriksaan: "",
+  tglBanding: "",
+  tglKasasi: "",
+  tglPk: "",
+  tglSelesai: "",
+  ketPertama: "",
+  ketBanding: "",
+  ketKasasi: "",
+  ketPk: "",
 };
 
 const inputStyle = { width: "100%", padding: "10px 14px", borderRadius: 8, border: "1.5px solid #e2e8f0", fontSize: 14, color: "#0f172a", outline: "none", transition: "border-color 0.2s", background: "white" };
@@ -55,6 +64,15 @@ export default function TambahPerkara() {
           putusan_pk: form.pk,
           status: form.status,
           tgl_daftar: form.tglDaftar,
+          tgl_pemeriksaan: form.tglPemeriksaan || null,
+          tgl_banding: form.tglBanding || null,
+          tgl_kasasi: form.tglKasasi || null,
+          tgl_pk: form.tglPk || null,
+          tgl_selesai: form.tglSelesai || null,
+          ket_pertama: form.ketPertama || null,
+          ket_banding: form.ketBanding || null,
+          ket_kasasi: form.ketKasasi || null,
+          ket_pk: form.ketPk || null,
         }),
       });
       const data = await res.json();
@@ -187,6 +205,54 @@ export default function TambahPerkara() {
                   ))}
                 </select>
               </Field>
+            </div>
+          </div>
+
+          {/* SECTION TANGGAL & KETERANGAN */}
+          <div style={{ background: "white", borderRadius: 16, padding: "28px", marginBottom: 20, boxShadow: "0 4px 20px rgba(15,23,42,0.05)", border: "1px solid #e8f0fe" }}>
+            <h2 style={{ fontSize: 15, fontWeight: 700, color: "#1e3a8a", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid #f0f4ff" }}>📅 Tanggal & Keterangan Per Tahap</h2>
+
+            {/* Tanggal */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "0 20px" }}>
+              {[
+                { label: "Tgl. Pemeriksaan", key: "tglPemeriksaan" },
+                { label: "Tgl. Banding", key: "tglBanding" },
+                { label: "Tgl. Kasasi", key: "tglKasasi" },
+                { label: "Tgl. PK", key: "tglPk" },
+                { label: "Tgl. Selesai Persidangan", key: "tglSelesai" },
+              ].map((f) => (
+                <Field key={f.key} label={f.label}>
+                  <input
+                    type="date"
+                    style={inputStyle}
+                    value={form[f.key] || ""}
+                    onChange={(e) => set(f.key, e.target.value)}
+                    onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
+                    onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
+                  />
+                </Field>
+              ))}
+            </div>
+
+            {/* Keterangan per putusan */}
+            <div style={{ marginTop: 8 }}>
+              {[
+                { label: "Keterangan Putusan Tk. Pertama", key: "ketPertama" },
+                { label: "Keterangan Putusan Banding", key: "ketBanding" },
+                { label: "Keterangan Putusan Kasasi", key: "ketKasasi" },
+                { label: "Keterangan Putusan PK", key: "ketPk" },
+              ].map((f) => (
+                <Field key={f.key} label={f.label}>
+                  <textarea
+                    style={{ ...inputStyle, minHeight: 70, resize: "vertical" }}
+                    value={form[f.key] || ""}
+                    onChange={(e) => set(f.key, e.target.value)}
+                    placeholder={`Penjelasan hasil ${f.label.toLowerCase()}...`}
+                    onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
+                    onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
+                  />
+                </Field>
+              ))}
             </div>
           </div>
 
