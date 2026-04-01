@@ -27,29 +27,37 @@ export default function EditPerkara() {
       .then((data) => {
         const found = data.data?.find((p) => p.id === parseInt(id));
         if (found)
-          if (found)
-            setForm({
-              noPerkara: found.no_perkara,
-              penggugat: found.penggugat,
-              tergugat: found.tergugat,
-              obyek: found.obyek_sengketa,
-              persiapan: found.tahap_persiapan,
-              pertama: found.putusan_pertama,
-              banding: found.putusan_banding,
-              kasasi: found.putusan_kasasi,
-              pk: found.putusan_pk,
-              status: found.status,
-              tglDaftar: found.tgl_daftar?.split("T")[0],
-              tglPemeriksaan: found.tgl_pemeriksaan?.split("T")[0] || "",
-              tglBanding: found.tgl_banding?.split("T")[0] || "",
-              tglKasasi: found.tgl_kasasi?.split("T")[0] || "",
-              tglPk: found.tgl_pk?.split("T")[0] || "",
-              tglSelesai: found.tgl_selesai?.split("T")[0] || "",
-              ketPertama: found.ket_pertama || "",
-              ketBanding: found.ket_banding || "",
-              ketKasasi: found.ket_kasasi || "",
-              ketPk: found.ket_pk || "",
-            });
+          setForm({
+            noTingkatPertama: found.no_tingkat_pertama || "",
+            noBanding: found.no_banding || "",
+            noKasasi: found.no_kasasi || "",
+            noPk: found.no_pk || "",
+            penggugat: found.penggugat || "",
+            tergugat: found.tergugat || "",
+            obyek: found.obyek_sengketa || "",
+            persiapan: found.tahap_persiapan || "Berlangsung",
+            pertama: found.putusan_pertama || "Belum",
+            banding: found.putusan_banding || "Belum",
+            kasasi: found.putusan_kasasi || "Belum",
+            pk: found.putusan_pk || "Belum",
+            status: found.status || "Pemeriksaan",
+            statusData: found.status_data || "TUN",
+            tglDaftar: found.tgl_daftar?.split("T")[0] || "",
+            tglDiajukanPertama: found.tgl_diajukan_pertama?.split("T")[0] || "",
+            tglDiputuskanPertama: found.tgl_diputuskan_pertama?.split("T")[0] || "",
+            tglDiajukanBanding: found.tgl_diajukan_banding?.split("T")[0] || "",
+            tglDiputuskanBanding: found.tgl_diputuskan_banding?.split("T")[0] || "",
+            tglDiajukanKasasi: found.tgl_diajukan_kasasi?.split("T")[0] || "",
+            tglDiputuskanKasasi: found.tgl_diputuskan_kasasi?.split("T")[0] || "",
+            tglDiajukanPk: found.tgl_diajukan_pk?.split("T")[0] || "",
+            tglDiputuskanPk: found.tgl_diputuskan_pk?.split("T")[0] || "",
+            tglDiajukanInkracht: found.tgl_diajukan_inkracht?.split("T")[0] || "",
+            tglDiputuskanInkracht: found.tgl_diputuskan_inkracht?.split("T")[0] || "",
+            ketPertama: found.ket_pertama || "",
+            ketBanding: found.ket_banding || "",
+            ketKasasi: found.ket_kasasi || "",
+            ketPk: found.ket_pk || "",
+          });
       });
   }, [id]);
 
@@ -64,7 +72,10 @@ export default function EditPerkara() {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({
-          no_perkara: form.noPerkara,
+          no_tingkat_pertama: form.noTingkatPertama || null,
+          no_banding: form.noBanding || null,
+          no_kasasi: form.noKasasi || null,
+          no_pk: form.noPk || null,
           penggugat: form.penggugat,
           tergugat: form.tergugat,
           obyek_sengketa: form.obyek,
@@ -74,12 +85,18 @@ export default function EditPerkara() {
           putusan_kasasi: form.kasasi,
           putusan_pk: form.pk,
           status: form.status,
+          status_data: form.statusData,
           tgl_daftar: form.tglDaftar,
-          tgl_pemeriksaan: form.tglPemeriksaan || null,
-          tgl_banding: form.tglBanding || null,
-          tgl_kasasi: form.tglKasasi || null,
-          tgl_pk: form.tglPk || null,
-          tgl_selesai: form.tglSelesai || null,
+          tgl_diajukan_pertama: form.tglDiajukanPertama || null,
+          tgl_diputuskan_pertama: form.tglDiputuskanPertama || null,
+          tgl_diajukan_banding: form.tglDiajukanBanding || null,
+          tgl_diputuskan_banding: form.tglDiputuskanBanding || null,
+          tgl_diajukan_kasasi: form.tglDiajukanKasasi || null,
+          tgl_diputuskan_kasasi: form.tglDiputuskanKasasi || null,
+          tgl_diajukan_pk: form.tglDiajukanPk || null,
+          tgl_diputuskan_pk: form.tglDiputuskanPk || null,
+          tgl_diajukan_inkracht: form.tglDiajukanInkracht || null,
+          tgl_diputuskan_inkracht: form.tglDiputuskanInkracht || null,
           ket_pertama: form.ketPertama || null,
           ket_banding: form.ketBanding || null,
           ket_kasasi: form.ketKasasi || null,
@@ -116,35 +133,35 @@ export default function EditPerkara() {
           </Link>
           <div>
             <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a" }}>Edit Perkara</h1>
-            <p style={{ color: "#64748b", fontSize: 13, marginTop: 2 }}>{form.noPerkara}</p>
+            <p style={{ color: "#64748b", fontSize: 13, marginTop: 2 }}>{form.noTingkatPertama}</p>
           </div>
         </div>
 
         {error && <div style={{ background: "#fee2e2", border: "1px solid #fca5a5", borderRadius: 10, padding: "12px 16px", marginBottom: 20, color: "#991b1b", fontSize: 13 }}>⚠️ {error}</div>}
 
         <form onSubmit={handleSubmit}>
+          {/* IDENTITAS */}
           <div style={{ background: "white", borderRadius: 16, padding: "28px", marginBottom: 20, boxShadow: "0 4px 20px rgba(15,23,42,0.05)", border: "1px solid #e8f0fe" }}>
             <h2 style={{ fontSize: 15, fontWeight: 700, color: "#1e3a8a", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid #f0f4ff" }}>📋 Identitas Perkara</h2>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 24px" }}>
-              <Field label="Nomor Perkara" required>
+              <Field label="No. Tingkat Pertama" required>
                 <input
                   style={inputStyle}
-                  value={form.noPerkara || ""}
-                  onChange={(e) => set("noPerkara", e.target.value)}
+                  value={form.noTingkatPertama || ""}
+                  onChange={(e) => set("noTingkatPertama", e.target.value)}
                   required
                   onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
                   onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
                 />
               </Field>
-              <Field label="Tanggal Daftar">
-                <input
-                  type="date"
-                  style={inputStyle}
-                  value={form.tglDaftar || ""}
-                  onChange={(e) => set("tglDaftar", e.target.value)}
-                  onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
-                  onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
-                />
+              <Field label="No. Banding">
+                <input style={inputStyle} value={form.noBanding || ""} onChange={(e) => set("noBanding", e.target.value)} onFocus={(e) => (e.target.style.borderColor = "#3b82f6")} onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")} />
+              </Field>
+              <Field label="No. Kasasi">
+                <input style={inputStyle} value={form.noKasasi || ""} onChange={(e) => set("noKasasi", e.target.value)} onFocus={(e) => (e.target.style.borderColor = "#3b82f6")} onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")} />
+              </Field>
+              <Field label="No. PK">
+                <input style={inputStyle} value={form.noPk || ""} onChange={(e) => set("noPk", e.target.value)} onFocus={(e) => (e.target.style.borderColor = "#3b82f6")} onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")} />
               </Field>
               <Field label="Penggugat" required>
                 <input
@@ -166,6 +183,28 @@ export default function EditPerkara() {
                   onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
                 />
               </Field>
+              <Field label="Tanggal Daftar">
+                <input
+                  type="date"
+                  style={inputStyle}
+                  value={form.tglDaftar || ""}
+                  onChange={(e) => set("tglDaftar", e.target.value)}
+                  onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
+                  onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
+                />
+              </Field>
+              <Field label="Status Data">
+                <select
+                  style={{ ...inputStyle, cursor: "pointer" }}
+                  value={form.statusData || "TUN"}
+                  onChange={(e) => set("statusData", e.target.value)}
+                  onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
+                  onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
+                >
+                  <option value="TUN">TUN</option>
+                  <option value="TERDATA">TERDATA</option>
+                </select>
+              </Field>
             </div>
             <Field label="Obyek Sengketa">
               <textarea
@@ -178,6 +217,7 @@ export default function EditPerkara() {
             </Field>
           </div>
 
+          {/* TAHAP PEMERIKSAAN */}
           <div style={{ background: "white", borderRadius: 16, padding: "28px", marginBottom: 20, boxShadow: "0 4px 20px rgba(15,23,42,0.05)", border: "1px solid #e8f0fe" }}>
             <h2 style={{ fontSize: 15, fontWeight: 700, color: "#1e3a8a", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid #f0f4ff" }}>⚖️ Tahap Pemeriksaan & Putusan</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "0 20px" }}>
@@ -222,52 +262,54 @@ export default function EditPerkara() {
             </div>
           </div>
 
-          {/* SECTION TANGGAL & KETERANGAN */}
+          {/* TANGGAL & KETERANGAN */}
           <div style={{ background: "white", borderRadius: 16, padding: "28px", marginBottom: 20, boxShadow: "0 4px 20px rgba(15,23,42,0.05)", border: "1px solid #e8f0fe" }}>
             <h2 style={{ fontSize: 15, fontWeight: 700, color: "#1e3a8a", marginBottom: 20, paddingBottom: 12, borderBottom: "1px solid #f0f4ff" }}>📅 Tanggal & Keterangan Per Tahap</h2>
-
-            {/* Tanggal */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "0 20px" }}>
-              {[
-                { label: "Tgl. Pemeriksaan", key: "tglPemeriksaan" },
-                { label: "Tgl. Banding", key: "tglBanding" },
-                { label: "Tgl. Kasasi", key: "tglKasasi" },
-                { label: "Tgl. PK", key: "tglPk" },
-                { label: "Tgl. Selesai Persidangan", key: "tglSelesai" },
-              ].map((f) => (
-                <Field key={f.key} label={f.label}>
-                  <input
-                    type="date"
-                    style={inputStyle}
-                    value={form[f.key] || ""}
-                    onChange={(e) => set(f.key, e.target.value)}
-                    onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
-                    onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
-                  />
-                </Field>
-              ))}
-            </div>
-
-            {/* Keterangan per putusan */}
-            <div style={{ marginTop: 8 }}>
-              {[
-                { label: "Keterangan Putusan Tk. Pertama", key: "ketPertama" },
-                { label: "Keterangan Putusan Banding", key: "ketBanding" },
-                { label: "Keterangan Putusan Kasasi", key: "ketKasasi" },
-                { label: "Keterangan Putusan PK", key: "ketPk" },
-              ].map((f) => (
-                <Field key={f.key} label={f.label}>
-                  <textarea
-                    style={{ ...inputStyle, minHeight: 70, resize: "vertical" }}
-                    value={form[f.key] || ""}
-                    onChange={(e) => set(f.key, e.target.value)}
-                    placeholder={`Penjelasan hasil ${f.label.toLowerCase()}...`}
-                    onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
-                    onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
-                  />
-                </Field>
-              ))}
-            </div>
+            {[
+              { label: "Tingkat Pertama", diajukan: "tglDiajukanPertama", diputuskan: "tglDiputuskanPertama", ket: "ketPertama", ketLabel: "Putusan Tingkat Pertama" },
+              { label: "Tingkat Banding", diajukan: "tglDiajukanBanding", diputuskan: "tglDiputuskanBanding", ket: "ketBanding", ketLabel: "Putusan Banding" },
+              { label: "Tingkat Kasasi", diajukan: "tglDiajukanKasasi", diputuskan: "tglDiputuskanKasasi", ket: "ketKasasi", ketLabel: "Putusan Kasasi" },
+              { label: "Tingkat PK", diajukan: "tglDiajukanPk", diputuskan: "tglDiputuskanPk", ket: "ketPk", ketLabel: "Putusan PK" },
+              { label: "Tingkat Inkracht", diajukan: "tglDiajukanInkracht", diputuskan: "tglDiputuskanInkracht", ket: null, ketLabel: null },
+            ].map((t, i) => (
+              <div key={i} style={{ marginBottom: 24, paddingBottom: 24, borderBottom: i < 4 ? "1px solid #f0f4ff" : "none" }}>
+                <div style={{ fontWeight: 700, color: "#1e3a8a", fontSize: 13, marginBottom: 12 }}>📌 {t.label}</div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0 24px" }}>
+                  <Field label="Tanggal Diajukan">
+                    <input
+                      type="date"
+                      style={inputStyle}
+                      value={form[t.diajukan] || ""}
+                      onChange={(e) => set(t.diajukan, e.target.value)}
+                      onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
+                      onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
+                    />
+                  </Field>
+                  <Field label="Tanggal Diputuskan">
+                    <input
+                      type="date"
+                      style={inputStyle}
+                      value={form[t.diputuskan] || ""}
+                      onChange={(e) => set(t.diputuskan, e.target.value)}
+                      onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
+                      onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
+                    />
+                  </Field>
+                </div>
+                {t.ket && (
+                  <Field label={t.ketLabel}>
+                    <textarea
+                      style={{ ...inputStyle, minHeight: 70, resize: "vertical" }}
+                      value={form[t.ket] || ""}
+                      onChange={(e) => set(t.ket, e.target.value)}
+                      placeholder={`Penjelasan ${t.ketLabel?.toLowerCase()}...`}
+                      onFocus={(e) => (e.target.style.borderColor = "#3b82f6")}
+                      onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
+                    />
+                  </Field>
+                )}
+              </div>
+            ))}
           </div>
 
           <div style={{ display: "flex", gap: 12, justifyContent: "flex-end" }}>
