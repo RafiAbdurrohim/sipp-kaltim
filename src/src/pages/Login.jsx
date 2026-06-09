@@ -66,16 +66,13 @@ export default function Login() {
                 width: 64,
                 height: 64,
                 margin: "0 auto 16px",
+                borderRadius: 16,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
               }}
             >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Coat_of_arms_of_East_Kalimantan.svg"
-                alt="Logo Kaltim"
-                style={{ width: 64, height: 64, objectFit: "contain" }}
-              />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Coat_of_arms_of_East_Kalimantan.svg" alt="Logo Kaltim" style={{ width: 64, height: 64, objectFit: "contain" }} />
             </div>
             <h1 style={{ color: "white", fontSize: 22, fontWeight: 800, letterSpacing: -0.3, marginBottom: 6 }}>Masuk ke Sistem</h1>
             <p style={{ color: "#ecedee", fontSize: 13 }}>SIPP TUN — Kalimantan Timur</p>
