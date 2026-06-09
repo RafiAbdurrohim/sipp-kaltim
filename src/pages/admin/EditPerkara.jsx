@@ -202,7 +202,7 @@ export default function EditPerkara() {
                   onBlur={(e) => (e.target.style.borderColor = "#e2e8f0")}
                 >
                   <option value="TUN">TUN</option>
-                  <option value="TERDATA">TERDATA</option>
+                  <option value="PERDATA">PERDATA</option>
                 </select>
               </Field>
             </div>
